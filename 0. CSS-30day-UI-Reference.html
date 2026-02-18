@@ -1,0 +1,3177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30-Day CSS Practice — UI Reference Guide</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --card: #1a1a24;
+      --border: #2a2a3a;
+      --accent1: #6c63ff;
+      --accent2: #ff6584;
+      --accent3: #43e97b;
+      --accent4: #f7b731;
+      --accent5: #00d2ff;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --white: #ffffff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      min-height: 100vh;
+      padding: 0 0 80px;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1030 50%, #0f1520 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 40px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(108, 99, 255, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #6c63ff, #ff6584, #43e97b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* SECTION HEADERS */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 50px 40px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header .badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .section-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .section-header .days {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    /* PROJECT GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      padding: 0 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent1);
+    }
+
+    .project-card .card-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .project-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .learn-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: var(--surface);
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* UI MOCKUP AREA */
+    .mockup {
+      background: #0e0e18;
+      padding: 24px;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ============================
+     FLEXBOX MOCKUPS
+  ============================ */
+
+    /* Day 1: Center button */
+    .mock-center-btn {
+      width: 100%;
+      height: 130px;
+      border: 2px dashed #2a2a4a;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mock-center-btn button {
+      background: var(--accent1);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: default;
+    }
+
+    /* Day 2: Navbar */
+    .mock-navbar {
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #2a2a4a;
+    }
+
+    .mock-navbar .logo {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent1);
+    }
+
+    .mock-navbar .links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .mock-navbar .links span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .mock-navbar .links span:first-child {
+      color: var(--text);
+    }
+
+    /* Day 3: Card column */
+    .mock-col-card {
+      width: 140px;
+      background: #1a1a2e;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #2a2a4a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mock-col-card .img {
+      background: linear-gradient(135deg, #6c63ff, #ff6584);
+      height: 70px;
+    }
+
+    .mock-col-card .content {
+      padding: 10px;
+      flex: 1;
+    }
+
+    .mock-col-card .content .title-line {
+      height: 8px;
+      background: #2a2a4a;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .mock-col-card .content .sub-line {
+      height: 6px;
+      background: #1e1e35;
+      border-radius: 4px;
+      width: 70%;
+    }
+
+    .mock-col-card .btn-wrap {
+      padding: 8px 10px;
+    }
+
+    .mock-col-card .btn-wrap div {
+      background: var(--accent1);
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    /* Day 4: Profile row */
+    .mock-profile {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 14px 18px;
+      border: 1px solid #2a2a4a;
+      width: 100%;
+    }
+
+    .mock-profile .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #43e97b, #00d2ff);
+      flex-shrink: 0;
+    }
+
+    .mock-profile .info {
+      flex: 1;
+    }
+
+    .mock-profile .name {
+      height: 9px;
+      background: #e8e8f0;
+      border-radius: 4px;
+      width: 80px;
+      margin-bottom: 7px;
+    }
+
+    .mock-profile .desc {
+      height: 7px;
+      background: #2a2a4a;
+      border-radius: 4px;
+      width: 130px;
+    }
+
+    /* Day 5: Pricing equal height */
+    .mock-pricing {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .mock-pricing .plan {
+      flex: 1;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mock-pricing .plan.highlight {
+      border-color: var(--accent1);
+      background: rgba(108, 99, 255, 0.1);
+    }
+
+    .mock-pricing .plan-name {
+      height: 8px;
+      border-radius: 4px;
+      background: #2a2a4a;
+      width: 60%;
+    }
+
+    .mock-pricing .plan-price {
+      height: 14px;
+      border-radius: 4px;
+      background: #e8e8f0;
+      width: 50%;
+    }
+
+    .mock-pricing .plan-feat {
+      height: 6px;
+      border-radius: 3px;
+      background: #1e1e35;
+    }
+
+    .mock-pricing .plan-btn {
+      height: 24px;
+      border-radius: 6px;
+      background: var(--accent1);
+      margin-top: auto;
+    }
+
+    .mock-pricing .plan.highlight .plan-btn {
+      background: var(--accent2);
+    }
+
+    /* Day 6: Two column responsive */
+    .mock-two-col {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .mock-two-col .col {
+      flex: 1;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mock-two-col .line {
+      height: 7px;
+      border-radius: 4px;
+      background: #2a2a4a;
+    }
+
+    .mock-two-col .line.short {
+      width: 60%;
+    }
+
+    .mock-two-col .img-block {
+      height: 50px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #6c63ff33, #ff658433);
+      border: 1px solid #2a2a4a;
+    }
+
+    /* Day 7: Footer */
+    .mock-footer {
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #2a2a4a;
+    }
+
+    .mock-footer .left {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mock-footer .left .logo-f {
+      height: 8px;
+      width: 70px;
+      background: var(--accent1);
+      border-radius: 4px;
+    }
+
+    .mock-footer .left .copy {
+      height: 6px;
+      width: 100px;
+      background: #2a2a4a;
+      border-radius: 4px;
+    }
+
+    .mock-footer .right {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mock-footer .right .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #2a2a4a;
+    }
+
+    /* Day 8: Horizontal gallery */
+    .mock-hscroll {
+      width: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .mock-hscroll .track {
+      display: flex;
+      gap: 10px;
+    }
+
+    .mock-hscroll .thumb {
+      flex-shrink: 0;
+      width: 80px;
+      height: 90px;
+      border-radius: 8px;
+    }
+
+    /* Day 9: Toggle buttons */
+    .mock-toggle {
+      display: flex;
+      gap: 8px;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 8px;
+      border: 1px solid #2a2a4a;
+    }
+
+    .mock-toggle .btn {
+      padding: 8px 14px;
+      border-radius: 7px;
+      font-size: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .mock-toggle .btn.active {
+      background: var(--accent1);
+      color: #fff;
+    }
+
+    /* Day 10: Form */
+    .mock-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mock-form .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mock-form .label {
+      height: 7px;
+      width: 60px;
+      background: #7a7a9a;
+      border-radius: 4px;
+    }
+
+    .mock-form .input {
+      height: 32px;
+      border-radius: 7px;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+    }
+
+    .mock-form .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .mock-form .row .field {
+      flex: 1;
+    }
+
+    .mock-form .submit {
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent1);
+      margin-top: 4px;
+    }
+
+    /* ============================
+     GRID MOCKUPS
+  ============================ */
+
+    /* Day 11: 3x3 gallery */
+    .mock-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      width: 100%;
+    }
+
+    .mock-gallery .cell {
+      aspect-ratio: 1;
+      border-radius: 6px;
+    }
+
+    /* Day 12: Dashboard */
+    .mock-dashboard {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      grid-template-rows: 30px 1fr;
+      gap: 6px;
+      width: 100%;
+      height: 140px;
+    }
+
+    .mock-dashboard .topbar {
+      grid-column: 1/-1;
+      background: #1a1a2e;
+      border-radius: 6px;
+      border: 1px solid #2a2a4a;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 8px;
+    }
+
+    .mock-dashboard .topbar .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .mock-dashboard .sidebar {
+      background: #1a1a2e;
+      border-radius: 6px;
+      border: 1px solid #2a2a4a;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 8px 6px;
+    }
+
+    .mock-dashboard .sidebar .item {
+      height: 8px;
+      border-radius: 4px;
+      background: #2a2a4a;
+    }
+
+    .mock-dashboard .sidebar .item.active {
+      background: var(--accent1);
+    }
+
+    .mock-dashboard .main {
+      background: #1a1a2e;
+      border-radius: 6px;
+      border: 1px solid #2a2a4a;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .mock-dashboard .stat {
+      background: var(--surface);
+      border-radius: 6px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mock-dashboard .stat .val {
+      height: 12px;
+      border-radius: 4px;
+      width: 60%;
+    }
+
+    .mock-dashboard .stat .lab {
+      height: 6px;
+      border-radius: 3px;
+      background: #2a2a4a;
+      width: 80%;
+    }
+
+    /* Day 13: Pricing rows */
+    .mock-pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+
+    .mock-pricing-grid .plan-g {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mock-pricing-grid .plan-g .n {
+      height: 7px;
+      border-radius: 4px;
+      background: #2a2a4a;
+    }
+
+    .mock-pricing-grid .plan-g .p {
+      height: 11px;
+      border-radius: 4px;
+      background: #e8e8f0;
+      width: 55%;
+    }
+
+    .mock-pricing-grid .plan-g .f {
+      height: 5px;
+      border-radius: 3px;
+      background: #1e1e35;
+    }
+
+    .mock-pricing-grid .plan-g .b {
+      height: 20px;
+      border-radius: 5px;
+      background: var(--accent1);
+      margin-top: auto;
+    }
+
+    .mock-pricing-grid .plan-g.h {
+      border-color: var(--accent2);
+    }
+
+    .mock-pricing-grid .plan-g.h .b {
+      background: var(--accent2);
+    }
+
+    /* Day 14: Responsive card grid */
+    .mock-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+
+    .mock-card-grid .cg {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .mock-card-grid .cg .ci {
+      height: 40px;
+    }
+
+    .mock-card-grid .cg .ct {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mock-card-grid .cg .ct .tl {
+      height: 7px;
+      border-radius: 4px;
+      background: #e8e8f0;
+    }
+
+    .mock-card-grid .cg .ct .sl {
+      height: 5px;
+      border-radius: 3px;
+      background: #2a2a4a;
+      width: 70%;
+    }
+
+    /* Day 15: Blog layout */
+    .mock-blog {
+      display: grid;
+      grid-template-columns: 1fr 60px;
+      grid-template-rows: 25px 1fr 25px;
+      gap: 5px;
+      width: 100%;
+      height: 140px;
+    }
+
+    .mock-blog .bh {
+      grid-column: 1/-1;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      border-radius: 6px;
+    }
+
+    .mock-blog .bm {
+      background: #1a1a2e;
+      border-radius: 6px;
+      border: 1px solid #2a2a4a;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mock-blog .bm .bl {
+      height: 6px;
+      border-radius: 3px;
+      background: #2a2a4a;
+    }
+
+    .mock-blog .bm .bl.w {
+      width: 50%;
+    }
+
+    .mock-blog .bs {
+      background: #1a1a2e;
+      border-radius: 6px;
+      border: 1px solid #2a2a4a;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mock-blog .bs .si {
+      height: 5px;
+      border-radius: 3px;
+      background: #2a2a4a;
+    }
+
+    .mock-blog .bf {
+      grid-column: 1/-1;
+      background: #1a1a2e;
+      border-radius: 6px;
+      border: 1px solid #2a2a4a;
+    }
+
+    /* ============================
+     SPACING MOCKUPS
+  ============================ */
+
+    /* Day 16: Card spacing */
+    .mock-spacing-card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      padding: 20px;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .mock-spacing-card .sp-title {
+      height: 10px;
+      background: #e8e8f0;
+      border-radius: 5px;
+    }
+
+    .mock-spacing-card .sp-sub {
+      height: 7px;
+      background: #2a2a4a;
+      border-radius: 4px;
+      width: 80%;
+    }
+
+    .mock-spacing-card .sp-sub2 {
+      height: 7px;
+      background: #2a2a4a;
+      border-radius: 4px;
+      width: 60%;
+    }
+
+    .mock-spacing-card .sp-btn {
+      height: 32px;
+      background: var(--accent3);
+      border-radius: 7px;
+    }
+
+    .sp-label {
+      position: absolute;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--accent3);
+    }
+
+    .sp-label.top {
+      top: 6px;
+      left: -40px;
+    }
+
+    .sp-label.left {
+      left: -38px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Day 17: Navbar gaps */
+    .mock-nav-gaps {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mock-nav-gaps .nav-row {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .mock-nav-gaps .gap-arrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--accent4);
+      text-align: center;
+    }
+
+    .mock-nav-gaps .nl {
+      height: 8px;
+      width: 40px;
+      background: #e8e8f0;
+      border-radius: 4px;
+    }
+
+    .mock-nav-gaps .nl.m {
+      background: var(--muted);
+    }
+
+    /* Day 18: Form spacing */
+    .mock-form-spacing {
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mock-form-spacing .ff {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mock-form-spacing .fl {
+      height: 7px;
+      width: 55px;
+      background: var(--muted);
+      border-radius: 4px;
+    }
+
+    .mock-form-spacing .fi {
+      height: 32px;
+      background: #1a1a2e;
+      border-radius: 7px;
+      border: 1px solid #2a2a4a;
+    }
+
+    /* Day 19: Footer icons */
+    .mock-footer-icons {
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid #2a2a4a;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .mock-footer-icons .ficon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* Day 20: Modal box */
+    .mock-modal-wrap {
+      width: 100%;
+      height: 130px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+      position: relative;
+    }
+
+    .mock-modal {
+      background: #1a1a2e;
+      border: 1px solid var(--accent1);
+      border-radius: 12px;
+      padding: 16px 20px;
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 8px 40px rgba(108, 99, 255, 0.3);
+    }
+
+    .mock-modal .mt {
+      height: 9px;
+      background: #e8e8f0;
+      border-radius: 4px;
+      width: 60%;
+    }
+
+    .mock-modal .mb {
+      height: 6px;
+      background: #2a2a4a;
+      border-radius: 4px;
+    }
+
+    .mock-modal .mbtns {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .mock-modal .mbtns div {
+      flex: 1;
+      height: 26px;
+      border-radius: 6px;
+    }
+
+    .mock-modal .mbtns .mc {
+      background: #2a2a4a;
+    }
+
+    .mock-modal .mbtns .mo {
+      background: var(--accent1);
+    }
+
+    /* ============================
+     REM/EM MOCKUPS
+  ============================ */
+
+    /* Day 21: Heading hierarchy */
+    .mock-headings {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+    }
+
+    .mock-headings .h1b {
+      height: 20px;
+      background: #e8e8f0;
+      border-radius: 5px;
+      width: 90%;
+    }
+
+    .mock-headings .h2b {
+      height: 14px;
+      background: #b0b0cc;
+      border-radius: 4px;
+      width: 75%;
+    }
+
+    .mock-headings .h3b {
+      height: 10px;
+      background: #7a7a9a;
+      border-radius: 4px;
+      width: 60%;
+    }
+
+    .mock-headings .pb {
+      height: 7px;
+      background: #2a2a4a;
+      border-radius: 4px;
+    }
+
+    .mock-headings .pb.s {
+      width: 80%;
+    }
+
+    .mock-headings .label-rem {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--accent4);
+    }
+
+    /* Day 22: Button rem sizing */
+    .mock-btn-rem {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .mock-btn-rem .bsize {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mock-btn-rem .bsize .btn {
+      background: var(--accent1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mock-btn-rem .bsize .lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+
+    /* Day 23: Nested em card */
+    .mock-nested {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 10px;
+      padding: 14px;
+      width: 200px;
+    }
+
+    .mock-nested .outer-title {
+      height: 12px;
+      background: #e8e8f0;
+      border-radius: 4px;
+      width: 70%;
+      margin-bottom: 10px;
+    }
+
+    .mock-nested .inner {
+      background: rgba(108, 99, 255, 0.1);
+      border: 1px solid var(--accent1);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mock-nested .inner .it {
+      height: 9px;
+      background: var(--accent1);
+      border-radius: 4px;
+      width: 60%;
+      opacity: 0.7;
+    }
+
+    .mock-nested .inner .is {
+      height: 6px;
+      background: #2a2a4a;
+      border-radius: 4px;
+    }
+
+    .mock-nested .em-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--accent1);
+      margin-top: 6px;
+    }
+
+    /* Day 24: Form typography scale */
+    .mock-form-type {
+      width: 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mock-form-type .ft-title {
+      height: 14px;
+      background: #e8e8f0;
+      border-radius: 4px;
+      width: 60%;
+    }
+
+    .mock-form-type .ft-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mock-form-type .ft-label {
+      height: 7px;
+      width: 50px;
+      background: var(--muted);
+      border-radius: 3px;
+    }
+
+    .mock-form-type .ft-input {
+      height: 30px;
+      background: #1a1a2e;
+      border-radius: 6px;
+      border: 1px solid #2a2a4a;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .mock-form-type .ft-input .ph {
+      height: 6px;
+      width: 80px;
+      background: #2a2a4a;
+      border-radius: 3px;
+    }
+
+    /* Day 25: Scalable card */
+    .mock-scale-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .mock-scale-card .size-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .mock-scale-card .sc {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mock-scale-card .sc .t {
+      border-radius: 3px;
+      background: #e8e8f0;
+    }
+
+    .mock-scale-card .sc .s {
+      border-radius: 3px;
+      background: #2a2a4a;
+    }
+
+    /* ============================
+     POSITION MOCKUPS
+  ============================ */
+
+    /* Day 26: Badge on card */
+    .mock-badge-card {
+      position: relative;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      padding: 16px;
+      width: 160px;
+    }
+
+    .mock-badge-card .bc-img {
+      height: 60px;
+      background: linear-gradient(135deg, #6c63ff, #ff6584);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .mock-badge-card .bc-t {
+      height: 8px;
+      background: #e8e8f0;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .mock-badge-card .bc-s {
+      height: 6px;
+      background: #2a2a4a;
+      border-radius: 4px;
+      width: 70%;
+    }
+
+    .mock-badge-card .badge-dot {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      background: var(--accent2);
+      border-radius: 50%;
+      border: 2px solid #0e0e18;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Day 27: Icon in input */
+    .mock-icon-input {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 200px;
+    }
+
+    .mock-icon-input .inp-wrap {
+      position: relative;
+      height: 38px;
+    }
+
+    .mock-icon-input .inp-bg {
+      width: 100%;
+      height: 100%;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+    }
+
+    .mock-icon-input .inp-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--muted);
+      border-radius: 50%;
+    }
+
+    .mock-icon-input .inp-text {
+      position: absolute;
+      left: 34px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 6px;
+      width: 80px;
+      background: #2a2a4a;
+      border-radius: 3px;
+    }
+
+    .mock-icon-input .inp-icon-right {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      background: var(--accent1);
+      border-radius: 3px;
+    }
+
+    /* Day 28: Tooltip */
+    .mock-tooltip-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      position: relative;
+    }
+
+    .mock-tooltip {
+      background: var(--surface);
+      border: 1px solid var(--accent1);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text);
+      white-space: nowrap;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .mock-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid var(--accent1);
+    }
+
+    .mock-tooltip-btn {
+      background: var(--accent1);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Day 29: Fixed header */
+    .mock-fixed-header {
+      width: 100%;
+      height: 130px;
+      background: #0e0e18;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #2a2a4a;
+    }
+
+    .mock-fixed-header .fixed-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 32px;
+      background: rgba(26, 26, 46, 0.95);
+      border-bottom: 1px solid var(--accent1);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .mock-fixed-header .fixed-bar .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent1);
+    }
+
+    .mock-fixed-header .fixed-bar .nl {
+      height: 6px;
+      width: 35px;
+      background: #2a2a4a;
+      border-radius: 3px;
+    }
+
+    .mock-fixed-header .content-scroll {
+      position: absolute;
+      top: 32px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mock-fixed-header .content-scroll .cl {
+      height: 7px;
+      background: #1a1a2e;
+      border-radius: 4px;
+    }
+
+    .mock-fixed-header .content-scroll .cl.s {
+      width: 80%;
+    }
+
+    /* Day 30: Modal overlay */
+    .mock-overlay {
+      width: 100%;
+      height: 130px;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .mock-overlay .page-bg {
+      position: absolute;
+      inset: 0;
+      background: #0e0e18;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px;
+    }
+
+    .mock-overlay .page-bg .pl {
+      height: 7px;
+      background: #1a1a2e;
+      border-radius: 4px;
+    }
+
+    .mock-overlay .overlay-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .mock-overlay .modal-box {
+      background: #1a1a2e;
+      border: 1px solid var(--accent1);
+      border-radius: 10px;
+      padding: 14px 18px;
+      width: 150px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .mock-overlay .modal-box .mh {
+      height: 9px;
+      background: #e8e8f0;
+      border-radius: 4px;
+      width: 55%;
+    }
+
+    .mock-overlay .modal-box .ms {
+      height: 6px;
+      background: #2a2a4a;
+      border-radius: 3px;
+    }
+
+    .mock-overlay .modal-box .mbr {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .mock-overlay .modal-box .mbr div {
+      flex: 1;
+      height: 22px;
+      border-radius: 5px;
+    }
+
+    .mock-overlay .modal-box .mbr .mc {
+      background: #2a2a4a;
+    }
+
+    .mock-overlay .modal-box .mbr .mo {
+      background: var(--accent1);
+    }
+
+    .mock-overlay .close-x {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 18px;
+      height: 18px;
+      background: #2a2a4a;
+      border-radius: 50%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+
+    /* ============================
+     COLOR DEFINITIONS
+  ============================ */
+    .c1 {
+      background: linear-gradient(135deg, #6c63ff, #a78bfa);
+    }
+
+    .c2 {
+      background: linear-gradient(135deg, #ff6584, #f97316);
+    }
+
+    .c3 {
+      background: linear-gradient(135deg, #43e97b, #38f9d7);
+    }
+
+    .c4 {
+      background: linear-gradient(135deg, #f7b731, #ffd700);
+    }
+
+    .c5 {
+      background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+    }
+
+    .c6 {
+      background: linear-gradient(135deg, #ee0979, #ff6a00);
+    }
+
+    .c7 {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .c8 {
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+    }
+
+    .c9 {
+      background: linear-gradient(135deg, #5f72bd, #9b23ea);
+    }
+
+    /* SECTION COLORS */
+    .flex-badge {
+      background: rgba(108, 99, 255, 0.2);
+      color: var(--accent1);
+      border: 1px solid var(--accent1);
+    }
+
+    .grid-badge {
+      background: rgba(67, 233, 123, 0.2);
+      color: var(--accent3);
+      border: 1px solid var(--accent3);
+    }
+
+    .spacing-badge {
+      background: rgba(247, 183, 49, 0.2);
+      color: var(--accent4);
+      border: 1px solid var(--accent4);
+    }
+
+    .rem-badge {
+      background: rgba(0, 210, 255, 0.2);
+      color: var(--accent5);
+      border: 1px solid var(--accent5);
+    }
+
+    .pos-badge {
+      background: rgba(255, 101, 132, 0.2);
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      max-width: 1200px;
+      margin: 10px auto 0;
+    }
+
+    /* TIP BOX */
+    .tip-box {
+      max-width: 1200px;
+      margin: 0 auto 8px;
+      padding: 0 40px;
+    }
+
+    .tip-box .tip {
+      background: rgba(108, 99, 255, 0.07);
+      border-left: 3px solid var(--accent1);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .tip-box .tip strong {
+      color: var(--accent1);
+    }
+
+    /* PRINT STYLES */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .project-card {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>30-Day CSS Practice</h1>
+    <p>// UI Reference Guide — All Projects Visualized</p>
+  </header>
+
+  <!-- ======================== FLEXBOX ======================== -->
+  <div class="section-header">
+    <span class="badge flex-badge">01</span>
+    <h2 style="color: var(--accent1)">Flexbox Projects</h2>
+    <span class="days">Day 1 – 10</span>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip"><strong>Tip:</strong> Don't use any <code>position</code> yet. Solve everything with flex only.
+    </div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Day 1 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 1</span>
+        <span class="project-title">Center Button in Container</span>
+        <span class="learn-tag">justify-content</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-center-btn">
+          <button>Click Me</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 2</span>
+        <span class="project-title">Navbar — 3 Links Spaced</span>
+        <span class="learn-tag">space-between</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-navbar">
+          <span class="logo">Brand</span>
+          <div class="links">
+            <span>Home</span>
+            <span>About</span>
+            <span>Contact</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 3</span>
+        <span class="project-title">Card — Image, Text, Button</span>
+        <span class="learn-tag">flex-direction: column</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-col-card">
+          <div class="img"></div>
+          <div class="content">
+            <div class="title-line"></div>
+            <div class="sub-line"></div>
+          </div>
+          <div class="btn-wrap">
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 4</span>
+        <span class="project-title">Profile Card — Row Layout</span>
+        <span class="learn-tag">flex-direction: row</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-profile">
+          <div class="avatar"></div>
+          <div class="info">
+            <div class="name"></div>
+            <div class="desc"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 5</span>
+        <span class="project-title">Equal-Height Pricing Columns</span>
+        <span class="learn-tag">flex: 1</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-pricing">
+          <div class="plan">
+            <div class="plan-name"></div>
+            <div class="plan-price"></div>
+            <div class="plan-feat"></div>
+            <div class="plan-feat"></div>
+            <div class="plan-btn"></div>
+          </div>
+          <div class="plan highlight">
+            <div class="plan-name"></div>
+            <div class="plan-price"></div>
+            <div class="plan-feat"></div>
+            <div class="plan-feat"></div>
+            <div class="plan-btn"></div>
+          </div>
+          <div class="plan">
+            <div class="plan-name"></div>
+            <div class="plan-price"></div>
+            <div class="plan-feat"></div>
+            <div class="plan-feat"></div>
+            <div class="plan-btn"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 6</span>
+        <span class="project-title">Responsive Two-Column Layout</span>
+        <span class="learn-tag">flex-wrap</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-two-col">
+          <div class="col">
+            <div class="img-block"></div>
+            <div class="line"></div>
+            <div class="line short"></div>
+          </div>
+          <div class="col">
+            <div class="line"></div>
+            <div class="line short"></div>
+            <div class="line"></div>
+            <div class="line short"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 7</span>
+        <span class="project-title">Footer — Left & Right Items</span>
+        <span class="learn-tag">space-between</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-footer">
+          <div class="left">
+            <div class="logo-f"></div>
+            <div class="copy"></div>
+          </div>
+          <div class="right">
+            <div class="icon c1"></div>
+            <div class="icon c5"></div>
+            <div class="icon c3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 8 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 8</span>
+        <span class="project-title">Horizontal Scroll Gallery</span>
+        <span class="learn-tag">overflow-x: auto</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-hscroll">
+          <div class="track">
+            <div class="thumb c1"></div>
+            <div class="thumb c2"></div>
+            <div class="thumb c3"></div>
+            <div class="thumb c5"></div>
+            <div class="thumb c4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 9 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 9</span>
+        <span class="project-title">Toggle Button Group</span>
+        <span class="learn-tag">gap</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-toggle">
+          <div class="btn active">All</div>
+          <div class="btn">Design</div>
+          <div class="btn">Dev</div>
+          <div class="btn">CSS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 10 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(108,99,255,0.2);color:var(--accent1)">Day 10</span>
+        <span class="project-title">Multi-Row Form — Aligned</span>
+        <span class="learn-tag">nested flex</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-form">
+          <div class="row">
+            <div class="field">
+              <div class="label"></div>
+              <div class="input"></div>
+            </div>
+            <div class="field">
+              <div class="label"></div>
+              <div class="input"></div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label"></div>
+            <div class="input"></div>
+          </div>
+          <div class="field">
+            <div class="label"></div>
+            <div class="input"></div>
+          </div>
+          <div class="submit"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ======================== GRID ======================== -->
+  <div class="section-header">
+    <span class="badge grid-badge">02</span>
+    <h2 style="color: var(--accent3)">CSS Grid Projects</h2>
+    <span class="days">Day 11 – 15</span>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip"><strong>Tip:</strong> Combine flex and grid — <strong>grid</strong> for layout,
+      <strong>flex</strong> inside cards.</div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Day 11 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(67,233,123,0.2);color:var(--accent3)">Day 11</span>
+        <span class="project-title">Simple 3×3 Gallery</span>
+        <span class="learn-tag">grid-template-columns</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-gallery">
+          <div class="cell c1"></div>
+          <div class="cell c2"></div>
+          <div class="cell c3"></div>
+          <div class="cell c4"></div>
+          <div class="cell c5"></div>
+          <div class="cell c6"></div>
+          <div class="cell c7"></div>
+          <div class="cell c8"></div>
+          <div class="cell c9"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 12 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(67,233,123,0.2);color:var(--accent3)">Day 12</span>
+        <span class="project-title">Dashboard — Sidebar + Main</span>
+        <span class="learn-tag">grid-template-areas</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-dashboard">
+          <div class="topbar">
+            <div class="dot" style="background:var(--accent2)"></div>
+            <div class="dot" style="background:var(--accent4)"></div>
+            <div class="dot" style="background:var(--accent3)"></div>
+          </div>
+          <div class="sidebar">
+            <div class="item active"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <div class="main">
+            <div class="stat">
+              <div class="val c1" style="height:12px;border-radius:4px;"></div>
+              <div class="lab"></div>
+            </div>
+            <div class="stat">
+              <div class="val c3" style="height:12px;border-radius:4px;"></div>
+              <div class="lab"></div>
+            </div>
+            <div class="stat">
+              <div class="val c2" style="height:12px;border-radius:4px;"></div>
+              <div class="lab"></div>
+            </div>
+            <div class="stat">
+              <div class="val c5" style="height:12px;border-radius:4px;"></div>
+              <div class="lab"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 13 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(67,233,123,0.2);color:var(--accent3)">Day 13</span>
+        <span class="project-title">Pricing Cards — 2 Rows</span>
+        <span class="learn-tag">grid-auto-flow</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-pricing-grid">
+          <div class="plan-g">
+            <div class="n"></div>
+            <div class="p"></div>
+            <div class="f"></div>
+            <div class="f"></div>
+            <div class="b"></div>
+          </div>
+          <div class="plan-g h">
+            <div class="n"></div>
+            <div class="p"></div>
+            <div class="f"></div>
+            <div class="f"></div>
+            <div class="b"></div>
+          </div>
+          <div class="plan-g">
+            <div class="n"></div>
+            <div class="p"></div>
+            <div class="f"></div>
+            <div class="f"></div>
+            <div class="b"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 14 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(67,233,123,0.2);color:var(--accent3)">Day 14</span>
+        <span class="project-title">Responsive Card Grid</span>
+        <span class="learn-tag">auto-fit + minmax()</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-card-grid">
+          <div class="cg">
+            <div class="ci c1"></div>
+            <div class="ct">
+              <div class="tl"></div>
+              <div class="sl"></div>
+            </div>
+          </div>
+          <div class="cg">
+            <div class="ci c3"></div>
+            <div class="ct">
+              <div class="tl"></div>
+              <div class="sl"></div>
+            </div>
+          </div>
+          <div class="cg">
+            <div class="ci c2"></div>
+            <div class="ct">
+              <div class="tl"></div>
+              <div class="sl"></div>
+            </div>
+          </div>
+          <div class="cg">
+            <div class="ci c5"></div>
+            <div class="ct">
+              <div class="tl"></div>
+              <div class="sl"></div>
+            </div>
+          </div>
+          <div class="cg">
+            <div class="ci c4"></div>
+            <div class="ct">
+              <div class="tl"></div>
+              <div class="sl"></div>
+            </div>
+          </div>
+          <div class="cg">
+            <div class="ci c7"></div>
+            <div class="ct">
+              <div class="tl"></div>
+              <div class="sl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 15 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(67,233,123,0.2);color:var(--accent3)">Day 15</span>
+        <span class="project-title">Blog Layout — Areas</span>
+        <span class="learn-tag">grid template areas</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-blog">
+          <div class="bh"></div>
+          <div class="bm">
+            <div class="bl"></div>
+            <div class="bl w"></div>
+            <div class="bl"></div>
+            <div class="bl w"></div>
+            <div class="bl"></div>
+          </div>
+          <div class="bs">
+            <div class="si"></div>
+            <div class="si"></div>
+            <div class="si"></div>
+            <div class="si"></div>
+          </div>
+          <div class="bf"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ======================== SPACING ======================== -->
+  <div class="section-header">
+    <span class="badge spacing-badge">03</span>
+    <h2 style="color: var(--accent4)">Spacing System</h2>
+    <span class="days">Day 16 – 20</span>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip"><strong>Tip:</strong> Always use <strong>4px / 8px / 12px / 16px / 24px / 32px</strong> scale.
+      Never use random values like 7px or 13px.</div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Day 16 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(247,183,49,0.2);color:var(--accent4)">Day 16</span>
+        <span class="project-title">Card with Consistent Spacing</span>
+        <span class="learn-tag">rem + spacing scale</span>
+      </div>
+      <div class="mockup">
+        <div style="position:relative; padding-left: 48px;">
+          <div
+            style="position:absolute;left:0;top:0;bottom:0;width:40px;display:flex;flex-direction:column;justify-content:space-around;align-items:flex-end;padding-right:8px;">
+            <span style="font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--accent4)">↕ 1rem</span>
+            <span style="font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--accent4)">↕ 1rem</span>
+            <span style="font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--accent4)">↕ 1rem</span>
+          </div>
+          <div class="mock-spacing-card">
+            <div class="sp-title"></div>
+            <div class="sp-sub"></div>
+            <div class="sp-sub2"></div>
+            <div class="sp-btn"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 17 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(247,183,49,0.2);color:var(--accent4)">Day 17</span>
+        <span class="project-title">Navbar Links — Equal Gaps</span>
+        <span class="learn-tag">gap property</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-nav-gaps">
+          <div class="nav-row">
+            <div class="nl"></div>
+            <div class="nl m"></div>
+            <div class="nl m"></div>
+            <div class="nl m"></div>
+          </div>
+          <div class="gap-arrow">←— gap: 20px —→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 18 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(247,183,49,0.2);color:var(--accent4)">Day 18</span>
+        <span class="project-title">Form — Label to Input Spacing</span>
+        <span class="learn-tag">vertical rhythm</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-form-spacing">
+          <div class="ff">
+            <div class="fl"></div>
+            <div class="fi"></div>
+          </div>
+          <div class="ff">
+            <div class="fl"></div>
+            <div class="fi"></div>
+          </div>
+          <div class="ff">
+            <div class="fl"></div>
+            <div class="fi"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 19 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(247,183,49,0.2);color:var(--accent4)">Day 19</span>
+        <span class="project-title">Footer Icons — Even Spacing</span>
+        <span class="learn-tag">margin vs gap</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-footer-icons">
+          <div class="ficon c1">𝕏</div>
+          <div class="ficon c5" style="color:#fff;font-weight:700">in</div>
+          <div class="ficon c2" style="color:#fff;font-weight:700">ig</div>
+          <div class="ficon c3" style="color:#fff;font-weight:700">gh</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 20 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(247,183,49,0.2);color:var(--accent4)">Day 20</span>
+        <span class="project-title">Modal Box — Padding + Margin</span>
+        <span class="learn-tag">box spacing</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-modal-wrap">
+          <div class="mock-modal">
+            <div class="mt"></div>
+            <div class="mb"></div>
+            <div class="mb" style="width:70%"></div>
+            <div class="mbtns">
+              <div class="mc"></div>
+              <div class="mo"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ======================== REM vs EM ======================== -->
+  <div class="section-header">
+    <span class="badge rem-badge">04</span>
+    <h2 style="color: var(--accent5)">rem vs em Projects</h2>
+    <span class="days">Day 21 – 25</span>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip"><strong>rem</strong> = relative to root (html). &nbsp;|&nbsp; <strong>em</strong> = relative to
+      parent element. Use rem for font sizes, padding, margins globally.</div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Day 21 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(0,210,255,0.2);color:var(--accent5)">Day 21</span>
+        <span class="project-title">Heading Hierarchy with rem</span>
+        <span class="learn-tag">font scaling</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-headings">
+          <span class="label-rem">h1 → 2.5rem</span>
+          <div class="h1b"></div>
+          <span class="label-rem">h2 → 1.75rem</span>
+          <div class="h2b"></div>
+          <span class="label-rem">h3 → 1.25rem</span>
+          <div class="h3b"></div>
+          <span class="label-rem">p → 1rem</span>
+          <div class="pb"></div>
+          <div class="pb s"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 22 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(0,210,255,0.2);color:var(--accent5)">Day 22</span>
+        <span class="project-title">Button Padding in rem</span>
+        <span class="learn-tag">consistent sizing</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-btn-rem">
+          <div class="bsize">
+            <div class="btn c1" style="width:60px;height:28px;border-radius:6px;"></div>
+            <span class="lbl">sm: 0.5rem 1rem</span>
+          </div>
+          <div class="bsize">
+            <div class="btn c1" style="width:80px;height:38px;border-radius:8px;"></div>
+            <span class="lbl">md: 0.75rem 1.5rem</span>
+          </div>
+          <div class="bsize">
+            <div class="btn c1" style="width:110px;height:50px;border-radius:10px;"></div>
+            <span class="lbl">lg: 1rem 2rem</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 23 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(0,210,255,0.2);color:var(--accent5)">Day 23</span>
+        <span class="project-title">Nested Card — em Scaling</span>
+        <span class="learn-tag">relative to parent</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-nested">
+          <div class="outer-title"></div>
+          <div class="inner">
+            <div class="it"></div>
+            <div class="is"></div>
+            <div class="is" style="width:80%"></div>
+          </div>
+          <div class="em-label">inner uses em → scales with parent font-size</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 24 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(0,210,255,0.2);color:var(--accent5)">Day 24</span>
+        <span class="project-title">Form Labels & Inputs Scaling</span>
+        <span class="learn-tag">responsive typography</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-form-type">
+          <div class="ft-title"></div>
+          <div class="ft-field">
+            <div class="ft-label"></div>
+            <div class="ft-input">
+              <div class="ph"></div>
+            </div>
+          </div>
+          <div class="ft-field">
+            <div class="ft-label"></div>
+            <div class="ft-input">
+              <div class="ph"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 25 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(0,210,255,0.2);color:var(--accent5)">Day 25</span>
+        <span class="project-title">Scalable Card — Root Font</span>
+        <span class="learn-tag">rem everywhere</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-scale-card">
+          <div class="size-row">
+            <div class="sc" style="width:70px;">
+              <div class="t" style="height:6px;width:40px;margin-bottom:4px;"></div>
+              <div class="s" style="height:4px;"></div>
+              <div class="s" style="height:4px;width:70%;margin-top:3px;"></div>
+            </div>
+            <div class="sc" style="width:90px;">
+              <div class="t" style="height:9px;width:55px;margin-bottom:6px;"></div>
+              <div class="s" style="height:6px;"></div>
+              <div class="s" style="height:6px;width:70%;margin-top:4px;"></div>
+            </div>
+            <div class="sc" style="width:115px;">
+              <div class="t" style="height:12px;width:70px;margin-bottom:8px;"></div>
+              <div class="s" style="height:8px;"></div>
+              <div class="s" style="height:8px;width:70%;margin-top:5px;"></div>
+            </div>
+          </div>
+          <span style="font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted)">html font-size: 12px →
+            16px → 20px</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ======================== POSITION ======================== -->
+  <div class="section-header">
+    <span class="badge pos-badge">05</span>
+    <h2 style="color: var(--accent2)">Position Projects</h2>
+    <span class="days">Day 26 – 30</span>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip"><strong>Rule:</strong> Only use <code>position</code> when flex/grid <em>cannot</em> solve it.
+    </div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Day 26 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(255,101,132,0.2);color:var(--accent2)">Day 26</span>
+        <span class="project-title">Badge on Card — Top Right</span>
+        <span class="learn-tag">absolute + relative</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-badge-card">
+          <div class="badge-dot">3</div>
+          <div class="bc-img"></div>
+          <div class="bc-t"></div>
+          <div class="bc-s"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 27 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(255,101,132,0.2);color:var(--accent2)">Day 27</span>
+        <span class="project-title">Icon Inside Input Field</span>
+        <span class="learn-tag">absolute positioning</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-icon-input">
+          <div class="inp-wrap">
+            <div class="inp-bg"></div>
+            <div class="inp-icon"></div>
+            <div class="inp-text"></div>
+          </div>
+          <div class="inp-wrap">
+            <div class="inp-bg"></div>
+            <div class="inp-icon" style="background:var(--accent4)"></div>
+            <div class="inp-text"></div>
+            <div class="inp-icon-right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 28 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(255,101,132,0.2);color:var(--accent2)">Day 28</span>
+        <span class="project-title">Tooltip Above Button</span>
+        <span class="learn-tag">absolute + transform</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-tooltip-wrap">
+          <div class="mock-tooltip">Hover to see tooltip ✨</div>
+          <div class="mock-tooltip-btn">Hover Me</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 29 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(255,101,132,0.2);color:var(--accent2)">Day 29</span>
+        <span class="project-title">Fixed Header on Scroll</span>
+        <span class="learn-tag">position: fixed</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-fixed-header">
+          <div class="fixed-bar">
+            <div class="logo-dot"></div>
+            <div class="nl"></div>
+            <div style="margin-left:auto;display:flex;gap:6px;">
+              <div class="nl"></div>
+              <div class="nl"></div>
+            </div>
+          </div>
+          <div class="content-scroll">
+            <div class="cl"></div>
+            <div class="cl s"></div>
+            <div class="cl"></div>
+            <div class="cl s"></div>
+            <div class="cl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 30 -->
+    <div class="project-card">
+      <div class="card-header">
+        <span class="day-badge" style="background:rgba(255,101,132,0.2);color:var(--accent2)">Day 30</span>
+        <span class="project-title">Modal Overlay + z-index</span>
+        <span class="learn-tag">fixed + z-index</span>
+      </div>
+      <div class="mockup">
+        <div class="mock-overlay">
+          <div class="page-bg">
+            <div class="pl"></div>
+            <div class="pl" style="width:80%"></div>
+            <div class="pl"></div>
+            <div class="pl" style="width:70%"></div>
+            <div class="pl"></div>
+            <div class="pl" style="width:90%"></div>
+          </div>
+          <div class="overlay-bg">
+            <div class="modal-box">
+              <div class="close-x" style="position:absolute;top:-8px;right:-8px;">✕</div>
+              <div class="mh"></div>
+              <div class="ms"></div>
+              <div class="ms" style="width:80%"></div>
+              <div class="mbr">
+                <div class="mc"></div>
+                <div class="mo"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div style="max-width:1200px;margin:60px auto 0;padding:0 40px;">
+    <div
+      style="border:1px solid var(--border);border-radius:16px;padding:30px;background:var(--card);text-align:center;">
+      <div style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:12px;">AFTER 30
+        DAYS YOU WILL</div>
+      <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;">
+        <span style="color:var(--accent1);font-size:0.85rem;font-weight:600">✓ Stop overthinking position</span>
+        <span style="color:var(--accent3);font-size:0.85rem;font-weight:600">✓ Build navbars & dashboards</span>
+        <span style="color:var(--accent4);font-size:0.85rem;font-weight:600">✓ CSS intuition for UI design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== HIDDEN TIPS SECTION ======================== -->
+  <style>
+    .tips-section {
+      max-width: 1200px;
+      margin: 80px auto 0;
+      padding: 0 40px 80px;
+    }
+
+    .tips-section-header {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .tips-section-header::before {
+      content: '';
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin-bottom: 50px;
+    }
+
+    .tips-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent2);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .tips-section-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #ff6584, #f7b731, #43e97b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .tips-section-header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    .tip-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .tip-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .tip-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .tip-card.c-purple {
+      border-top-color: var(--accent1);
+    }
+
+    .tip-card.c-purple::before {
+      background: var(--accent1);
+    }
+
+    .tip-card.c-pink {
+      border-top-color: var(--accent2);
+    }
+
+    .tip-card.c-pink::before {
+      background: var(--accent2);
+    }
+
+    .tip-card.c-green {
+      border-top-color: var(--accent3);
+    }
+
+    .tip-card.c-green::before {
+      background: var(--accent3);
+    }
+
+    .tip-card.c-yellow {
+      border-top-color: var(--accent4);
+    }
+
+    .tip-card.c-yellow::before {
+      background: var(--accent4);
+    }
+
+    .tip-card.c-blue {
+      border-top-color: var(--accent5);
+    }
+
+    .tip-card.c-blue::before {
+      background: var(--accent5);
+    }
+
+    .tip-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      opacity: 0.6;
+    }
+
+    .tip-card.c-purple .tip-num {
+      color: var(--accent1);
+    }
+
+    .tip-card.c-pink .tip-num {
+      color: var(--accent2);
+    }
+
+    .tip-card.c-green .tip-num {
+      color: var(--accent3);
+    }
+
+    .tip-card.c-yellow .tip-num {
+      color: var(--accent4);
+    }
+
+    .tip-card.c-blue .tip-num {
+      color: var(--accent5);
+    }
+
+    .tip-icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .tip-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .tip-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .tip-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .tip-code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text);
+      margin: 10px 0;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .tip-code .bad {
+      color: #ff6584;
+    }
+
+    .tip-code .good {
+      color: #43e97b;
+    }
+
+    .tip-code .comment {
+      color: var(--muted);
+    }
+
+    .tip-code .prop {
+      color: #00d2ff;
+    }
+
+    .tip-code .val {
+      color: #f7b731;
+    }
+
+    .tip-rule {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .tip-rule .arrow {
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+
+    .tip-rule strong {
+      color: var(--text);
+    }
+
+    .tip-percent-row {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .tip-percent {
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .tip-scale {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
+
+    .scale-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--accent4);
+    }
+
+    .tip-highlight {
+      background: rgba(108, 99, 255, 0.08);
+      border-left: 3px solid var(--accent1);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--text);
+      margin: 12px 0;
+      line-height: 1.6;
+    }
+
+    .tip-card.c-pink .tip-highlight {
+      border-left-color: var(--accent2);
+      background: rgba(255, 101, 132, 0.07);
+    }
+
+    .tip-card.c-green .tip-highlight {
+      border-left-color: var(--accent3);
+      background: rgba(67, 233, 123, 0.07);
+    }
+
+    .tip-card.c-yellow .tip-highlight {
+      border-left-color: var(--accent4);
+      background: rgba(247, 183, 49, 0.07);
+    }
+
+    .tip-card.c-blue .tip-highlight {
+      border-left-color: var(--accent5);
+      background: rgba(0, 210, 255, 0.07);
+    }
+
+    /* WIDE CARD */
+    .tip-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .wide-inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .wide-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .wide-item .wi-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .wide-item .wi-desc {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* FINAL MINDSET CARD */
+    .mindset-card {
+      background: linear-gradient(135deg, #0f0f20 0%, #1a1030 50%, #0f1520 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mindset-card::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 101, 132, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .mindset-card .mc-title {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, #ff6584, #f7b731);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .mindset-card .mc-sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 28px;
+      line-height: 1.6;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .mindset-pillars {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .pillar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 120px;
+    }
+
+    .pillar .p-icon {
+      font-size: 1.4rem;
+    }
+
+    .pillar .p-text {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+  </style>
+
+  <div class="tips-section">
+    <div class="tips-section-header">
+      <div class="tips-eyebrow">// Hidden Developer Tips</div>
+      <h2>🧠 CSS Rules Real Devs Follow</h2>
+      <p>What senior developers internalize — that no tutorial teaches</p>
+    </div>
+
+    <div class="tips-grid">
+
+      <!-- Tip 1: Layout First -->
+      <div class="tip-card c-purple">
+        <div class="tip-num">Tip 01</div>
+        <span class="tip-icon">🏗️</span>
+        <h3>Layout First, Styling Later</h3>
+        <p>Before writing a single CSS rule, decide your layout strategy. This one habit separates fast developers from
+          slow ones.</p>
+        <div class="tip-percent-row">
+          <span class="tip-percent" style="background:rgba(108,99,255,0.2);color:var(--accent1)">80% → flex</span>
+          <span class="tip-percent" style="background:rgba(67,233,123,0.2);color:var(--accent3)">15% → grid</span>
+          <span class="tip-percent" style="background:rgba(255,101,132,0.2);color:var(--accent2)">5% → position</span>
+        </div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>1D layout?</strong> Use flex (row or
+            column)</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>2D layout?</strong> Use grid</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Overlay / badge?</strong> Then use
+            position</span></div>
+      </div>
+
+      <!-- Tip 2: Parent → Child -->
+      <div class="tip-card c-pink">
+        <div class="tip-num">Tip 02</div>
+        <span class="tip-icon">📦</span>
+        <h3>Always Think Parent → Child</h3>
+        <p>90% of CSS bugs are in the parent, not the child. When something breaks — check parent first.</p>
+        <div class="tip-highlight">Layout is controlled by the parent. Never forget this.</div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Is parent <strong>flex</strong> or
+            <strong>block</strong>?</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Does parent have a <strong>width</strong>?</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Is <strong>align-items</strong> affecting this?</span>
+        </div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Is <strong>overflow: hidden</strong> clipping?</span>
+        </div>
+      </div>
+
+      <!-- Tip 3: Spacing Rule -->
+      <div class="tip-card c-yellow">
+        <div class="tip-num">Tip 03</div>
+        <span class="tip-icon">📏</span>
+        <h3>Spacing Scale — Never Random Values</h3>
+        <p>Random spacing looks amateur. Pick a scale and never deviate from it.</p>
+        <div class="tip-code">
+          <span class="bad">/* ❌ Bad */</span><br>
+          <span class="prop">margin</span>: <span class="val">13px</span>;<br>
+          <span class="prop">padding</span>: <span class="val">7px</span>;<br><br>
+          <span class="good">/* ✅ Good — use the scale */</span><br>
+          <span class="prop">margin</span>: <span class="val">1rem</span>;<br>
+          <span class="prop">padding</span>: <span class="val">0.5rem 1rem</span>;
+        </div>
+        <div class="tip-scale">
+          <span class="scale-pill">4px</span>
+          <span class="scale-pill">8px</span>
+          <span class="scale-pill">12px</span>
+          <span class="scale-pill">16px</span>
+          <span class="scale-pill">24px</span>
+          <span class="scale-pill">32px</span>
+          <span class="scale-pill">48px</span>
+          <span class="scale-pill">64px</span>
+        </div>
+      </div>
+
+      <!-- Tip 4: Font & Units -->
+      <div class="tip-card c-blue">
+        <div class="tip-num">Tip 04</div>
+        <span class="tip-icon">🔠</span>
+        <h3>Font & Unit Rules</h3>
+        <p>Mixing units randomly destroys consistency. Follow these rules without exceptions.</p>
+        <div class="tip-code">
+          <span class="good">rem</span> → font-size, padding, margin<br>
+          <span class="good">px</span> → border, shadows, fixed things<br>
+          <span class="good">%</span> → width inside container<br>
+          <span class="good">em</span> → only inside components<br><br>
+          <span class="comment">/* Simple rule: */</span><br>
+          <span class="comment">/* Default rem. px only if needed. */</span>
+        </div>
+        <div class="tip-highlight">Default to rem. Use px only when it must be fixed.</div>
+      </div>
+
+      <!-- Tip 5: No Fixed Height -->
+      <div class="tip-card c-green">
+        <div class="tip-num">Tip 05</div>
+        <span class="tip-icon">📐</span>
+        <h3>Don't Use Height Unless Needed</h3>
+        <p>Hardcoding height is one of the most common beginner mistakes. It breaks responsive layouts instantly.</p>
+        <div class="tip-code">
+          <span class="bad">/* ❌ Breaks on small screens */</span><br>
+          <span class="prop">height</span>: <span class="val">100px</span>;<br><br>
+          <span class="good">/* ✅ Let content define height */</span><br>
+          <span class="prop">min-height</span>: <span class="val">100px</span>;<br><br>
+          <span class="good">/* ✅ Or just don't set it */</span><br>
+          <span class="comment">/* Let padding control size */</span>
+        </div>
+      </div>
+
+      <!-- Tip 6: Avoid Position for Layout -->
+      <div class="tip-card c-purple">
+        <div class="tip-num">Tip 06</div>
+        <span class="tip-icon">🎯</span>
+        <h3>Avoid position: absolute for Layout</h3>
+        <p>If you're using absolute to align items, you're fighting CSS instead of working with it.</p>
+        <div class="tip-highlight">Only reach for position when flex/grid literally cannot do it.</div>
+        <p style="margin-top:10px;font-size:0.78rem;color:var(--muted)"><strong style="color:var(--accent1)">OK to use
+            absolute for:</strong></p>
+        <div class="tip-rule"><span class="arrow">✓</span><span>Badge on a card corner</span></div>
+        <div class="tip-rule"><span class="arrow">✓</span><span>Tooltip above a button</span></div>
+        <div class="tip-rule"><span class="arrow">✓</span><span>Icon inside input field</span></div>
+        <div class="tip-rule"><span class="arrow">✓</span><span>Modal overlay</span></div>
+      </div>
+
+      <!-- Tip 7: Gap over Margin -->
+      <div class="tip-card c-green">
+        <div class="tip-num">Tip 07</div>
+        <span class="tip-icon">📦</span>
+        <h3>Use gap Instead of Margin for Flex/Grid</h3>
+        <p>Child margins cause margin-collapse bugs and are harder to maintain. Gap on the parent is always cleaner.</p>
+        <div class="tip-code">
+          <span class="bad">/* ❌ Old way — messy */</span><br>
+          <span class="prop">.child</span> {<br>
+          &nbsp;&nbsp;<span class="prop">margin-right</span>: <span class="val">20px</span>;<br>
+          }<br><br>
+          <span class="good">/* ✅ Modern way — clean */</span><br>
+          <span class="prop">.parent</span> {<br>
+          &nbsp;&nbsp;<span class="prop">display</span>: <span class="val">flex</span>;<br>
+          &nbsp;&nbsp;<span class="prop">gap</span>: <span class="val">20px</span>;<br>
+          }
+        </div>
+      </div>
+
+      <!-- Tip 8: Self-Contained Components -->
+      <div class="tip-card c-pink">
+        <div class="tip-num">Tip 08</div>
+        <span class="tip-icon">🧩</span>
+        <h3>Keep Components Self-Contained</h3>
+        <p>A well-built component can be dropped anywhere on the page and still look correct. If it breaks when moved —
+          it's not self-contained.</p>
+        <div class="tip-highlight">Think: "This card should work anywhere on any page."</div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Own its own <strong>padding</strong></span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>No <strong>external margin dependencies</strong></span>
+        </div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Doesn't break if <strong>reused
+              elsewhere</strong></span></div>
+      </div>
+
+      <!-- Tip 9: Desktop First -->
+      <div class="tip-card c-yellow">
+        <div class="tip-num">Tip 09</div>
+        <span class="tip-icon">📱</span>
+        <h3>Build Desktop First, Then Responsive</h3>
+        <p>Trying to be responsive from the start creates chaos. Nail the desktop layout first, then scale it down.</p>
+        <div class="tip-code">
+          <span class="comment">/* Step 1: Build desktop layout */</span><br>
+          <span class="comment">/* Step 2: Shrink the browser */</span><br>
+          <span class="comment">/* Step 3: Fix what breaks */</span><br><br>
+          <span class="good">/* Tools to fix responsive: */</span><br>
+          flex-wrap &nbsp;&nbsp;&nbsp;→ wrap items<br>
+          auto-fit &nbsp;&nbsp;&nbsp;&nbsp;→ responsive grid<br>
+          @media &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ override styles
+        </div>
+      </div>
+
+      <!-- Tip 10: DevTools -->
+      <div class="tip-card c-blue">
+        <div class="tip-num">Tip 10</div>
+        <span class="tip-icon">🛠️</span>
+        <h3>Use DevTools Aggressively</h3>
+        <p>DevTools is not just for debugging JavaScript. It's where CSS mastery actually happens — live, instant,
+          visual.</p>
+        <div class="tip-rule"><span class="arrow">→</span><span>Toggle <strong>flex</strong> on/off and watch what
+            happens</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Add <strong>border: 1px solid red</strong> to see layout
+            boxes</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Check the <strong>box model</strong> on every
+            element</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Test <strong>alignment live</strong> without
+            reloading</span></div>
+        <div class="tip-highlight">DevTools is your real CSS teacher. Use it every session.</div>
+      </div>
+
+      <!-- Tip 11: Alignment -->
+      <div class="tip-card c-purple">
+        <div class="tip-num">Tip 11</div>
+        <span class="tip-icon">🎨</span>
+        <h3>UI Is About Alignment</h3>
+        <p>The difference between amateur and professional UI is almost always alignment and spacing — not colors or
+          shadows.</p>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Equal padding</strong> on all sides of a
+            section</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Same border radius</strong> on related
+            elements</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Consistent spacing</strong> between
+            sections</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Clean vertical & horizontal</strong> alignment
+            lines</span></div>
+        <div class="tip-highlight">Zoom out and ask: do all the elements visually line up?</div>
+      </div>
+
+      <!-- Tip 12: Keep CSS Simple -->
+      <div class="tip-card c-green">
+        <div class="tip-num">Tip 12</div>
+        <span class="tip-icon">🧼</span>
+        <h3>Keep CSS Simple</h3>
+        <p>If your CSS feels complicated and hacky, that's a sign you're solving the problem the wrong way.</p>
+        <div class="tip-code">
+          <span class="bad">/* ❌ Sign of bad CSS: */</span><br>
+          <span class="comment">deep nesting, lots of position,</span><br>
+          <span class="comment">random values, !important</span><br><br>
+          <span class="good">/* ✅ Sign of good CSS: */</span><br>
+          <span class="comment">flat selectors, flex/grid,</span><br>
+          <span class="comment">consistent spacing, readable</span>
+        </div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Less nesting</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>Less <code
+              style="font-size:0.7rem;color:var(--accent2)">position</code></span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span>More flex/grid</span></div>
+      </div>
+
+      <!-- Tip 13: Practice Rule -->
+      <div class="tip-card c-pink">
+        <div class="tip-num">Tip 13</div>
+        <span class="tip-icon">🚀</span>
+        <h3>Practice Rule — Stop Watching, Start Building</h3>
+        <p>Watching tutorials gives zero muscle memory. The only way to get fast at CSS is to build real UI and hit real
+          problems.</p>
+        <div class="tip-highlight">Find a design → Try to rebuild it → Get stuck → Fix it → Repeat.</div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Frontend Mentor</strong> — real challenge
+            specs</span></div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Dribbble</strong> — find UI to clone</span>
+        </div>
+        <div class="tip-rule"><span class="arrow">→</span><span><strong>Real sites</strong> — inspect and rebuild small
+            parts</span></div>
+        <p style="margin-top:10px;font-size:0.78rem;color:var(--accent3);font-weight:600">Struggle → Fix → Repeat = real
+          skill.</p>
+      </div>
+
+      <!-- Tip 14: How to Know You're Improving -->
+      <div class="tip-card c-yellow">
+        <div class="tip-num">Tip 14</div>
+        <span class="tip-icon">🏆</span>
+        <h3>How to Know You're Improving</h3>
+        <p>Progress in CSS is hard to see day-to-day. Here are the real signals that you're leveling up.</p>
+        <div class="tip-rule"><span class="arrow">✓</span><span>You <strong>rarely use position</strong> for
+            layout</span></div>
+        <div class="tip-rule"><span class="arrow">✓</span><span>You <strong>don't guess spacing values</strong>
+            anymore</span></div>
+        <div class="tip-rule"><span class="arrow">✓</span><span>You <strong>debug fast</strong> — check parent
+            first</span></div>
+        <div class="tip-rule"><span class="arrow">✓</span><span>Layout feels <strong>predictable</strong>, not
+            random</span></div>
+        <div class="tip-rule"><span class="arrow">✓</span><span>You <strong>stop fighting CSS</strong> — it just
+            works</span></div>
+        <div class="tip-highlight">When CSS starts feeling predictable, you've leveled up.</div>
+      </div>
+
+    </div>
+
+    <!-- FINAL MINDSET CARD -->
+    <div class="mindset-card">
+      <div class="mc-title">🔥 The Real Secret to CSS Mastery</div>
+      <div class="mc-sub">CSS is not about memorizing properties. Every strong UI developer thinks in these four things
+        — not syntax.</div>
+      <div class="mindset-pillars">
+        <div class="pillar">
+          <span class="p-icon">🏗️</span>
+          <span class="p-text">Structure</span>
+        </div>
+        <div class="pillar">
+          <span class="p-icon">📏</span>
+          <span class="p-text">Spacing</span>
+        </div>
+        <div class="pillar">
+          <span class="p-icon">📦</span>
+          <span class="p-text">Parent → Child</span>
+        </div>
+        <div class="pillar">
+          <span class="p-icon">✨</span>
+          <span class="p-text">Consistency</span>
+        </div>
+      </div>
+      <p style="margin-top:24px;font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--muted)">You already
+        know React. Now you're just training your visual + layout brain.</p>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
